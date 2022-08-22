@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span><a mat-button routerLink="/users">Users</a></span>
+
+    <span class="spacer"></span>
+    
+    <span *ngIf="userName; then thenBlock else elseBlock"></span>
+    <ng-template #thenBlock>
+        {{userName}}
+        <button mat-button type="button" (click)="logout()">
+            <mat-icon>logout</mat-icon> Logout
+        </button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <a mat-button routerLink="/login">
+            <mat-icon>login</mat-icon> Login
+        </a>
+    </ng-template>
+  </mat-toolbar>

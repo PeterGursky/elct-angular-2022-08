@@ -99,11 +99,10 @@ export class UsersService {
       map(token => {
         this.token = token;
         this.userName = auth.name;
+        this.messageService.successMessage('Login successful');
         return true;
       }),
-      catchError(error => {
-        return of(false);
-      })
+      catchError(error => this.httpErrorToMessage(error))
     );
   }
 

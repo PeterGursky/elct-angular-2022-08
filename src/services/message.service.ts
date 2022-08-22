@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
 
 export interface Message {
@@ -11,19 +12,13 @@ export interface Message {
 })
 export class MessageService {
 
-  messages$ = new Subject<Message>();
-
-  constructor() { }
-
-  public messages(): Observable<Message> {
-    return this.messages$;
-  }
+  constructor(private snackBar: MatSnackBar) { }
 
   public errorMessage(message: string): void {
-    this.messages$.next({message, type: 'danger'});
+    this.snackBar.open(message, 'ERROR', {panelClass: 'redSnackBar', duration: 4000});
   }
 
   public successMessage(message: string): void {
-    this.messages$.next({message, type: 'success'});
+    this.snackBar.open(message, 'SUCCESS', {panelClass: 'greenSnackBar', duration: 4000});
   }
 }
