@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { P404Component } from './p404/p404.component';
 import { MaterialModule } from 'src/modules/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UsersModule } from 'src/modules/users/users.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
+    UsersModule,
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
