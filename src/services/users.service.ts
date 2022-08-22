@@ -94,6 +94,13 @@ export class UsersService {
     );
   }
 
+  public getGroup(id?:number): Observable<Group> {
+    return this.http.get(this.serverUrl + "group/" + id).pipe(
+      map(groupObj => Group.clone(groupObj as Group)),
+      catchError(error => this.httpErrorToMessage(error))
+    );
+  }
+
   public login(auth: Auth):Observable<boolean> {
     return this.http.post(this.serverUrl + 'login', auth, { responseType: 'text' }).pipe(
       map(token => {

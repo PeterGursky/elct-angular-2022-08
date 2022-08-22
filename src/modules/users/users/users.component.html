@@ -1,3 +1,8 @@
+<mat-form-field appearance="fill">
+    <mat-label>Filter ...</mat-label>
+    <input matInput type="text" (keyup)="onFilter($event)">
+</mat-form-field>
+
 <table mat-table matSort [dataSource]="usersDataSource">
     <mat-text-column name="id"></mat-text-column>
     <ng-container matColumnDef="name">

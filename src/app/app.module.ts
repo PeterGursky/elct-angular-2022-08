@@ -12,6 +12,7 @@ import { P404Component } from './p404/p404.component';
 import { MaterialModule } from 'src/modules/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UsersModule } from 'src/modules/users/users.module';
+import { GroupsModule } from 'src/modules/groups/groups.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UsersModule } from 'src/modules/users/users.module';
     FormsModule,
     MaterialModule,
     UsersModule,
+    GroupsModule,
     BrowserAnimationsModule,
     AppRoutingModule
   ],

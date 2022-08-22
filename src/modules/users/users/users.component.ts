@@ -29,7 +29,29 @@ export class UsersComponent implements OnInit, AfterViewInit {
       this.usersDataSource.data = users;
       this.usersDataSource.paginator = this.paginator;
       this.usersDataSource.sort = this.sort;
+
+      this.usersDataSource.filterPredicate = 
+        (user: User, filter: string) => {
+          if (user.name.toLowerCase().includes(filter)) return true;
+          if (user.email.toLowerCase().includes(filter)) return true;
+          if (user.groups.map(gr => gr.name).some(grName => grName.toLowerCase().includes(filter))) return true;
+          return false;
+        };
+      this.usersDataSource.sortingDataAccessor = (user: User, col: string): string => {
+        switch (col) {
+          case 'groups':
+            return user.groups.map(gr => gr.name).join(' ');
+          default:
+            return user[col as keyof User]?.toString() || '';
+        }
+      }  
     });
+  }
+
+  onFilter(event: any) {
+    const filter = event.target.value.trim().toLowerCase();
+    this.usersDataSource.filter = filter;
+    this.paginator?.firstPage();
   }
 
 }

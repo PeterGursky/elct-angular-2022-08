@@ -1,0 +1,10 @@
+<p>Group with id {{groupId}}</p>
+
+<ul *ngIf="group">
+    <li>Id: {{group.id}}</li>
+    <li>Name: {{group.name}}</li>
+    <li>Permissions: {{group.permissions.join(', ')}}</li>
+</ul>
+
+<a mat-button routerLink="../{{groupId?groupId-1:0}}">Previous</a>
+<a mat-button routerLink="../{{groupId?groupId+1:0}}">Next</a>
