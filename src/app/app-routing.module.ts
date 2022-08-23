@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { P404Component } from './p404/p404.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: 'groups',
@@ -13,6 +14,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
+  {path: 'register', component: RegisterComponent },
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/login', pathMatch:'full'},
   {path: '**', component: P404Component}

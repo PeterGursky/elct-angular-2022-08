@@ -135,6 +135,13 @@ export class UsersService {
     this.token = null;
   }
 
+  // returns ['name','email'] or ['name'] or ['email'] or []
+  userConflicts(user: User): Observable<string[]> {
+    return this.http.post<string[]>(this.serverUrl + 'user-conflicts', user).pipe(
+      catchError(error => this.httpErrorToMessage(error))
+    );
+  }
+
   private httpErrorToMessage(error: any):Observable<never> {
     if (error instanceof HttpErrorResponse) {
       if (error.status === 0) {

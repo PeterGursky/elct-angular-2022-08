@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { P404Component } from './p404/p404.component';
 import { MaterialModule } from 'src/modules/material.module';
@@ -14,6 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UsersModule } from 'src/modules/users/users.module';
 import { GroupsModule } from 'src/modules/groups/groups.module';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     LoginComponent,
     P404Component,
     NavbarComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
     AppRoutingModule
