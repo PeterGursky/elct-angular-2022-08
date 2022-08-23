@@ -1,11 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, EMPTY, map, Observable, of, Subscriber, tap } from 'rxjs';
+import { catchError, defaultIfEmpty, EMPTY, map, Observable, of, Subscriber, tap } from 'rxjs';
 import { Auth } from 'src/entities/auth';
 import { Group } from 'src/entities/group';
 import { User } from 'src/entities/user';
 import { MessageService } from './message.service';
+
+export const DEFAULT_REDIRECT_AFTER_LOGIN="/users";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class UsersService {
                    new User('FeroService','fero@fero.sk',undefined, undefined, undefined),
                    {name: 'HankaService', email: 'hanka@hanka.sk', password: '', active: true, groups: []}]; 
   private userSubscriber?: Subscriber<string>;
+  redirectAfterLogin = DEFAULT_REDIRECT_AFTER_LOGIN;
 
   constructor(private http: HttpClient,
               private messageService: MessageService,
@@ -51,6 +54,19 @@ export class UsersService {
       subsciber.next(this.userName);
     });
   }
+
+  isLoggedIn():boolean {
+    return !!this.token;
+  }
+
+  isLoggedInAsync(): Observable<boolean> {
+    if (!this.isLoggedIn()) return of(false);
+    return this.getExtendedUsers().pipe(
+      defaultIfEmpty(null),
+      map(data => !!data)
+    );
+  }
+
   public getLocalUsers(): User[] {
     return this.users;
   }
@@ -114,6 +130,7 @@ export class UsersService {
   }
 
   public logout() {
+    this.redirectAfterLogin = DEFAULT_REDIRECT_AFTER_LOGIN;
     this.userName = null;
     this.token = null;
   }

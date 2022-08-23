@@ -1,1 +1,7 @@
-<p>groups-add works!</p>
+<form (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Enter new group</mat-label>
+        <input matInput type="text" [(ngModel)]="groupName" name="name">
+    </mat-form-field>
+    <button type="submit" mat-button color="primary">Add group</button>
+</form>

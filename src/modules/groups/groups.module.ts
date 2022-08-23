@@ -8,6 +8,7 @@ import { GroupsHomeComponent } from './groups-home/groups-home.component';
 import { GroupsAddComponent } from './groups-add/groups-add.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { MaterialModule } from '../material.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { MaterialModule } from '../material.module';
   imports: [
     CommonModule,
     MaterialModule,
+    FormsModule,
     GroupsRoutingModule
   ]
 })

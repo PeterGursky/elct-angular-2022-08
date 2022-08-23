@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     console.log('Auth:', this.auth);
     this.usersService.login(this.auth).subscribe(success => {
       if (success) {
-        this.router.navigateByUrl('/users');
+        this.router.navigateByUrl(this.usersService.redirectAfterLogin);
       }
     });
   }

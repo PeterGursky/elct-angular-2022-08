@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Group } from 'src/entities/group';
 import { UsersService } from 'src/services/users.service';
 
@@ -9,10 +10,15 @@ import { UsersService } from 'src/services/users.service';
 })
 export class GroupsListComponent implements OnInit {
   groups: Group[] = [];
-  constructor(private usersService: UsersService) { }
+  title = '';
+
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.usersService.getGroups().subscribe(gr => this.groups = gr);
+    this.activatedRoute.data.subscribe(data => {
+      this.groups = data['groups'];
+      this.title = data['title'];
+    })
   }
 
 }
