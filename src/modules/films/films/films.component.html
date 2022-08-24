@@ -3,7 +3,7 @@
     <input matInput type="text" (keyup)="onFilter($event)">
 </mat-form-field>
 
-<table mat-table matSort [dataSource]="films">
+<table mat-table matSort [dataSource]="filmsDataSource">
     <mat-text-column name="id"></mat-text-column>
     <ng-container matColumnDef="nazov">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Názov</th>

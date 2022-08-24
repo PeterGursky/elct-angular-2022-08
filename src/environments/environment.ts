@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverAddr: 'http://localhost:8080/'
+  serverAddr: 'http://localhost:8080/',
+  chatWs: 'ws://localhost:8080/ws'
 };
 
 /*

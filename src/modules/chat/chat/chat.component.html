@@ -1,0 +1,29 @@
+<div>
+    <form (ngSubmit)="onConnectClick()" #connectForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your chat name</mat-label>
+            <input matInput type="text" required [(ngModel)]="name" name="name" [disabled]="connected">
+        </mat-form-field>
+        <button type="submit" mat-button color="primary"
+           [disabled]="connectForm.form.invalid || connected">Connect</button>
+        <button type="button" mat-button color="primary" (click)="disconnect()" [disabled]="!connected">Disconnect</button>
+   </form>
+
+</div>
+<div *ngIf="connected">
+    <form (ngSubmit)="onSendClick()" #sendForm="ngForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Message:</mat-label>
+            <input matInput type="text" required [(ngModel)]="message" name="message" #messageInput>
+        </mat-form-field>
+        <button type="submit" mat-button color="primary">Send message</button>
+    </form>
+</div>
+
+<table *ngIf="connected" mat-table [dataSource]="chatMessages">
+    <mat-text-column name="name"></mat-text-column>
+    <mat-text-column name="message"></mat-text-column>
+
+    <tr mat-header-row *matHeaderRowDef="['name','message']"></tr>
+    <tr mat-row *matRowDef="let chatMessage; columns: ['name','message']"></tr>
+</table>

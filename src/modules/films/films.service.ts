@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Film } from 'src/entities/film';
@@ -22,15 +22,39 @@ export class FilmsService {
     return this.usersService.token;
   }
 
-  getTokenHeader() {
+  getTokenHeader(): {
+    headers? : {[header: string]: string},
+    params?: HttpParams
+  } | undefined {
     if (this.token) {
       return { headers: {"X-Auth-Token": this.token}}
     }
     return undefined;
   }
 
-  getFilms(): Observable<FilmsResponse> {
+  getFilms(orderBy?: string, descending?: boolean, indexFrom?: number, 
+           indexTo?: number, search?: string): Observable<FilmsResponse> {
     let options = this.getTokenHeader();
+    if (orderBy || descending || indexFrom || indexTo || search) {
+      options = {...(options || {}), params: new HttpParams()};
+    }
+    if (options && options.params) {
+      if (orderBy) {
+        options.params = options.params.set('orderBy', orderBy);
+      }
+      if (descending) {
+        options.params = options.params.set('descending', descending);
+      }
+      if (indexFrom) {
+        options.params = options.params.set('indexFrom', indexFrom);
+      }
+      if (indexTo) {
+        options.params = options.params.set('indexTo', indexTo);
+      }
+      if (search) {
+        options.params = options.params.set('search', search);
+      }
+    }
     return this.http.get<FilmsResponse>(this.serverUrl+'films', options);
   }
 

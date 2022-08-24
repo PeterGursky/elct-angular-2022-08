@@ -15,7 +15,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {path: 'films',
-   loadChildren: () => import('../modules/films/films.module').then(mod => mod.FilmsModule)
+    loadChildren: () => import('../modules/films/films.module').then(mod => mod.FilmsModule)
+  },
+  {path: 'chat',
+    loadChildren: () => import('../modules/chat/chat.module').then(mod => mod.ChatModule)
   },
   {path: 'register', component: RegisterComponent },
   {path: 'login', component: LoginComponent},
