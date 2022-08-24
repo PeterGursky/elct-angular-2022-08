@@ -14,6 +14,9 @@
                 <mat-error *ngIf="name.errors && name.errors['minlength']">
                     Username must have at least {{name.errors['minlength']['requiredLength']}} characters but only has {{name.errors['minlength']['actualLength']}}
                 </mat-error>
+                <mat-error *ngIf="name.errors && name.errors['serverConflict']">
+                  {{name.errors['serverConflict']}}
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Enter your email</mat-label>
@@ -22,6 +25,9 @@
                     E-mail is required
                 </mat-error >
                 <mat-error *ngIf="email.errors && (email.errors['email'] || email.errors['pattern']) ">E-mail is in wrong format</mat-error>
+                <mat-error *ngIf="email.errors && email.errors['serverConflict']">
+                  {{email.errors['serverConflict']}}
+                </mat-error>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Enter your password</mat-label>

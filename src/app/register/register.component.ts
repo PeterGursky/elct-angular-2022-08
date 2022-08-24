@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { User } from 'src/entities/user';
+import { UsersService } from 'src/services/users.service';
 import * as zxcvbn from 'zxcvbn';
 
 @Component({
@@ -40,7 +42,7 @@ export class RegisterComponent implements OnInit {
     password2: new FormControl<string>('',{nonNullable: true}),
   }, this.passwordsMatchValidator);
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
   }
@@ -63,7 +65,19 @@ export class RegisterComponent implements OnInit {
 
   serverConflictValidator(field: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return of(null);
+      const name = field === 'name' ? control.value : '';
+      const email = field === 'email' ? control.value : '';
+
+      const user = new User(name, email);
+      return this.usersService.userConflicts(user).pipe(
+        map(conflictsArray => {
+          if (conflictsArray.length === 0) {
+            return null;
+          } else {
+            return {serverConflict: "this " + field + " is already on the server"};
+          }
+        })
+      );
     }
   }
 
