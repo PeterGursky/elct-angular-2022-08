@@ -5,6 +5,7 @@ import { catchError, defaultIfEmpty, EMPTY, map, Observable, of, Subscriber, tap
 import { Auth } from 'src/entities/auth';
 import { Group } from 'src/entities/group';
 import { User } from 'src/entities/user';
+import { environment } from 'src/environments/environment';
 import { MessageService } from './message.service';
 
 export const DEFAULT_REDIRECT_AFTER_LOGIN="/users";
@@ -13,7 +14,7 @@ export const DEFAULT_REDIRECT_AFTER_LOGIN="/users";
   providedIn: 'root'
 })
 export class UsersService {
-  serverUrl = "http://localhost:8080/";
+  serverUrl = environment.serverAddr;
   users: User[] = [new User("JanoService","jano@jano.sk", 1, new Date(),'qwerty'),
                    new User('FeroService','fero@fero.sk',undefined, undefined, undefined),
                    {name: 'HankaService', email: 'hanka@hanka.sk', password: '', active: true, groups: []}]; 

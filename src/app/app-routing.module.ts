@@ -14,6 +14,9 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
+  {path: 'films',
+   loadChildren: () => import('../modules/films/films.module').then(mod => mod.FilmsModule)
+  },
   {path: 'register', component: RegisterComponent },
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/login', pathMatch:'full'},
